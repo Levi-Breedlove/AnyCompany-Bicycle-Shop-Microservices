@@ -6,7 +6,7 @@
 
 <p align="center">
   <img src="https://img.shields.io/badge/status-in_progress-2ea44f?style=flat-square" alt="Status Badge" />
-  <img src="https://img.shields.io/badge/phase-1_packaged-1f6feb?style=flat-square" alt="Phase Badge" />
+  <img src="https://img.shields.io/badge/phase-4_packaged-1f6feb?style=flat-square" alt="Phase Badge" />
   <img src="https://img.shields.io/badge/frontend-React-61dafb?style=flat-square&logo=react&logoColor=white" alt="React Badge" />
   <img src="https://img.shields.io/badge/framework-django-0c4b33?style=flat-square&logo=django&logoColor=white" alt="Django Badge" />
   <img src="https://img.shields.io/badge/cloud-AWS-232f3e?style=flat-square&logo=amazonaws&logoColor=white" alt="AWS Badge" />
@@ -20,7 +20,7 @@
 </p>
 
 <p align="center">
-  <b>Current Phase:</b> Phase 1 packaged with React/Vite frontend foundation, preserved Django monolith baseline, local validation scripts, and AWS microservices design guidance
+  <b>Current Phase:</b> Phase 4 packaged with React storefront, Products and Orders APIs, DynamoDB-backed data, SAM infrastructure, and personal AWS account deployment guides for every phase archive
 </p>
 
 </div>
@@ -31,9 +31,11 @@
 
 This project focuses on refactoring the **AnyCompany Bicycle Parts application** from a Django monolith into a **React + AWS serverless microservices architecture**.
 
-The project starts from an existing Django ecommerce application and follows a multi-sprint sequence centered on frontend modernization, service decomposition, serverless API development, DynamoDB-backed service data, and eventual AWS deployment.
+The project starts from an existing Django ecommerce application and follows a phased sprint sequence centered on frontend modernization, service decomposition, serverless API development, DynamoDB-backed service data, and AWS deployment readiness.
 
-At the current stage, this repository functions as the **documentation and packaged-deliverable record** for the microservices project. Phase 1 is preserved as an archived zip package and has not been expanded into the repository as live source code.
+At the current stage, this repository functions as the **documentation and packaged-deliverable record** for the microservices project. Phases 1 through 4 are preserved as archived zip packages under `docs/phase-zips/`.
+
+> **Schedule note:** Phases 1-4 were completed during one accelerated project week, so the sprint log below bakes all four phase deliverables into the Week 1 entry.
 
 ---
 
@@ -47,7 +49,7 @@ AWS Cloud Institute project repository for documenting project progress, storing
 
 **AnyCompany Bicycle Parts** has an existing Django web application that supports product listing, order submission, order lookup, and low-inventory reporting.
 
-The existing monolith stores Products, Orders, Order Items, and Inventory in a single relational database and deploys the application as one tightly coupled unit. This project continues the modernization work by preparing the frontend foundation, preserving the original Django baseline, and documenting the target AWS serverless microservices design.
+The existing monolith stores Products, Orders, Order Items, and Inventory in a single relational database and deploys the application as one tightly coupled unit. This project modernizes that baseline by introducing a React frontend, AWS serverless service boundaries, API Gateway routes, Lambda handlers, DynamoDB tables, and S3-hosted assets.
 
 Original monolith reference: https://github.com/Levi-Breedlove/AnyCompany-Bicycle-Shop
 
@@ -58,11 +60,11 @@ Original monolith reference: https://github.com/Levi-Breedlove/AnyCompany-Bicycl
 | Category | Current State |
 |----------|---------------|
 | Project Status | In Progress |
-| Timeline | Multi-sprint microservices build |
+| Timeline | Accelerated multi-phase microservices build |
 | Repository Type | Documentation and packaged phase artifacts |
-| Deployment Target | Future AWS static frontend and serverless microservices |
-| Application Type | React frontend with preserved Django baseline |
-| Current Focus | Phase 1 complete: frontend foundation, Django baseline package, local validation scripts, and AWS target architecture documentation |
+| Deployment Target | AWS static frontend and serverless microservices |
+| Application Type | React frontend with preserved Django baseline and AWS serverless backend packages |
+| Current Focus | Phase 4 complete: Products API, order history, order details, order creation, DynamoDB data, SAM infrastructure, S3 image assets, and personal AWS deployment guides |
 
 ---
 
@@ -75,11 +77,9 @@ This project uses the class activity's target AWS microservices design for refac
 </p>
 
 **Architecture flow**  
-`React UI on Amazon S3 → Amazon API Gateway → AWS Lambda microservices → Amazon DynamoDB service-owned tables`
+`React UI on Amazon S3 -> Amazon API Gateway -> AWS Lambda microservices -> Amazon DynamoDB service-owned tables`
 
-> This architecture represents the target deployment pattern for the Bicycle Parts microservices project and will continue to be refined as later phases are completed.
->
-> Phase 1 is narrower than the final target architecture: the package establishes the React/Vite frontend foundation and preserves the Django monolith baseline. API Gateway, Lambda, DynamoDB service tables, AWS SAM templates, and production hosting remain roadmap items for later phases.
+The Phase 4 package implements the core serverless pattern for catalog and order workflows. The preserved Django monolith remains available in Phase 1 for comparison and decomposition reference.
 
 ---
 
@@ -89,18 +89,20 @@ This project uses the class activity's target AWS microservices design for refac
   <tr>
     <td valign="top" width="50%">
 
-### AWS Services and Roadmap
+### AWS Services
 
 | Service | Purpose |
 |---------|---------|
 | AWS Code Editor / EC2 | Lab development workstation and preview environment |
-| GitHub / Git | Stores source code changes for the current handoff workflow |
-| AWS CodeCommit | Optional source-control target used in the class lab flow |
-| Amazon S3 | Roadmap static hosting target for the React frontend |
-| Amazon API Gateway | Roadmap HTTP integration layer for service endpoints |
-| AWS Lambda | Roadmap compute layer for Products, Orders, and Inventory services |
-| Amazon DynamoDB | Roadmap serverless NoSQL datastore owned by each service |
-| AWS SAM | Roadmap serverless build and deployment workflow |
+| GitHub / Git | Source-control handoff workflow |
+| AWS CodeCommit | Optional source-control target used in class lab flow |
+| Amazon S3 | Hosts frontend builds and browser-readable image assets |
+| Amazon API Gateway | HTTP integration layer for service endpoints |
+| AWS Lambda | Compute layer for Products and Orders microservices |
+| Amazon DynamoDB | Serverless datastore for Products and Orders tables |
+| AWS SAM / CloudFormation | Serverless build and deployment workflow |
+| IAM | Deployment and runtime permissions for SAM, Lambda, DynamoDB, S3, and API Gateway |
+| Amazon CloudWatch Logs | Lambda runtime logging and troubleshooting |
 
   </td>
   <td valign="top" width="50%">
@@ -111,11 +113,11 @@ This project uses the class activity's target AWS microservices design for refac
 |-------|------------------|
 | Frontend | React, Vite, JavaScript |
 | Backend Baseline | Python, Django |
+| Serverless Backend | Python 3.12 Lambda handlers, AWS SAM |
 | Source Control | Git, GitHub, AWS CodeCommit |
 | Testing | Vitest, React Testing Library, Django test runner, Coverage.py |
 | Code Quality | ESLint, Pylint, pylint-django |
-| Documentation | Markdown, architecture image assets, class PDF references |
-| Future Cloud Services | Amazon S3, Amazon API Gateway, AWS Lambda, Amazon DynamoDB |
+| Documentation | Markdown, architecture image assets, AWS setup guides |
 
   </td>
   </tr>
@@ -125,35 +127,45 @@ This project uses the class activity's target AWS microservices design for refac
 
 ## Project Scope and What This Capstone Demonstrates
 
-This capstone-style project is designed to take an existing Django bicycle parts ecommerce application through a microservices refactor while building practical experience across frontend development, service decomposition, test automation, AWS service selection, and packaged sprint delivery.
+This capstone-style project takes an existing Django bicycle parts ecommerce application through a microservices refactor while building practical experience across frontend development, service decomposition, test automation, AWS service selection, and packaged sprint delivery.
 
-Through the planned sprint sequence, this project demonstrates:
+Through the completed phase sequence, this project demonstrates:
 
 - working from an existing Django monolith
 - preserving a baseline application snapshot for future comparison
 - creating a React/Vite frontend foundation
-- adding local validation scripts for both frontend and backend baseline code
-- documenting a target AWS serverless microservices architecture
-- preparing for future Products, Orders, and Inventory microservices
+- replacing static product data with a Products API
+- adding order history, order details, and order creation workflows
+- deploying service APIs through AWS SAM, API Gateway, Lambda, and DynamoDB
+- hosting frontend image assets from Amazon S3
+- documenting all personal-account AWS deployment prerequisites, IAM roles, policies, and cleanup steps
 - packaging phase deliverables as clean zip archives
 
 ---
 
 ## Phase Guide and Package Notes
 
-This repository currently serves as the documentation and packaging layer for the microservices project rather than the live application source itself.
+This repository serves as the documentation and packaging layer for the microservices project rather than the live application source itself.
 
 At this stage, the repository contains:
 
 - project documentation
 - architecture image assets used in the README
-- packaged **Phase 1** application snapshot stored as a zip archive under `docs/phase-zips/`
+- packaged **Phase 1**, **Phase 2**, **Phase 3**, and **Phase 4** application snapshots under `docs/phase-zips/`
+- a personal AWS account setup guide inside every phase package
 
-The live React and Django project files for Phase 1 are preserved inside the archived package and are not yet extracted into the root repository as active source code.
+The live React, Django, and serverless project files are preserved inside the archived packages and are not expanded into the root repository as active source code. Each zip package acts as a point-in-time snapshot that can be used for reference, backup, migration, deployment practice, or later extraction into a live working codebase.
 
-This approach keeps the repository clean while still preserving the project deliverables, architecture assets, class references, and the current state of work completed so far.
+### AWS Setup Guide Locations
 
-Each zip package acts as a point-in-time snapshot of the application and can be used for reference, backup, migration, or later extraction into a live working codebase.
+| Phase | Zip Package | AWS Guide Inside Zip |
+|---|---|---|
+| Phase 1 | `docs/phase-zips/phase-1-bicycle-shop-microservices.zip` | `AWS_SETUP_GUIDE.md` |
+| Phase 2 | `docs/phase-zips/phase-2-bicycle-shop-microservices.zip` | `AWS_SETUP_GUIDE.md` |
+| Phase 3 | `docs/phase-zips/phase-3-bicycle-shop-microservices.zip` | `microservices/AWS_SETUP_GUIDE.md` |
+| Phase 4 | `docs/phase-zips/phase-4-bicycle-shop-microservices.zip` | `microservices/AWS_SETUP_GUIDE.md` |
+
+Each guide covers the AWS services, IAM deployer permissions, Lambda runtime roles, inline policies, seed/upload script permissions, deployment commands, frontend environment values, smoke tests, troubleshooting, cleanup, and official AWS references needed to deploy that phase in a personal AWS account.
 
 ---
 
@@ -161,12 +173,15 @@ Each zip package acts as a point-in-time snapshot of the application and can be 
 
 ```bash
 .
-├── docs/                                                       # Project documentation and supporting assets
-│   ├── images/                                                # Images used in documentation and README
-│   │   └── bicycle-parts-microservices-architecture.png       # Target AWS microservices architecture diagram
-│   └── phase-zips/                                            # Archived phase deliverables
-│       └── phase-1-bicycle-shop-microservices.zip             # Phase 1 packaged React frontend and Django baseline snapshot
-└── README.md                                                  # Project overview, architecture, and status tracking
+|-- docs/
+|   |-- images/
+|   |   `-- bicycle-parts-microservices-architecture.png
+|   `-- phase-zips/
+|       |-- phase-1-bicycle-shop-microservices.zip
+|       |-- phase-2-bicycle-shop-microservices.zip
+|       |-- phase-3-bicycle-shop-microservices.zip
+|       `-- phase-4-bicycle-shop-microservices.zip
+`-- README.md
 ```
 
 ---
@@ -176,56 +191,146 @@ Each zip package acts as a point-in-time snapshot of the application and can be 
 <details>
 <summary><b>Phase 1 Package Contents</b></summary>
 
-The archived Phase 1 application package contains the React/Vite frontend foundation, the preserved Django monolith baseline, and supporting development files.
+The archived Phase 1 package contains the React/Vite frontend foundation, the preserved Django monolith baseline, and supporting development files.
 
 ```bash
 phase-1-bicycle-shop-microservices.zip
-├── .gitignore
-├── bikify.sh
-├── bike-app/                                      # React/Vite frontend foundation
-│   ├── .env.example                              # Optional Vite environment values
-│   ├── deployment.md                             # Frontend local and AWS preview guide
-│   ├── eslint.config.js                          # ESLint configuration
-│   ├── index.html                                # Vite HTML entry point
-│   ├── package-lock.json                         # Locked npm dependency graph
-│   ├── package.json                              # Frontend scripts and dependencies
-│   ├── vite.config.js                            # Vite, React, test, and preview configuration
-│   ├── public/                                   # Public favicon and icon assets
-│   └── src/                                      # React source code, components, tests, and assets
-└── django/                                       # Preserved Django monolith baseline
-    ├── bicycle_app/                              # Django app: models, views, URLs, templates, tests
-    │   ├── migrations/                           # Database schema migration files
-    │   ├── templates/                            # Django HTML templates
-    │   ├── admin.py                              # Django admin registrations
-    │   ├── apps.py                               # App configuration
-    │   ├── models.py                             # Product, Order, and Order_Item models
-    │   ├── tests.py                              # Baseline Django tests
-    │   ├── urls.py                               # App-level URL routing
-    │   └── views.py                              # Monolith view logic and order workflow
-    ├── bicycle_project/                          # Django project configuration
-    │   ├── settings.py                           # Environment-aware Django settings
-    │   ├── urls.py                               # Root URL configuration
-    │   └── wsgi.py                               # WSGI entry point for deployment
-    ├── media/                                    # Product image assets referenced by products.json
-    ├── static/                                   # Template CSS and image assets required for local Django rendering
-    ├── .env.example                              # Template for required environment variables
-    ├── local_build.sh                            # Runs Pylint, tests, and coverage in one command
-    ├── manage.py                                 # Django management CLI entry point
-    ├── deployment.md                             # Phase 1 local and AWS deployment guide
-    ├── products.json                             # Product fixture data
-    ├── requirements-dev.txt                      # Dev dependencies: coverage, pylint-django, XML reporting
-    ├── requirements.txt                          # Production dependencies: Django, Gunicorn, AWS/storage support
-    └── setup.sh                                  # One-command Django local setup script
+|-- AWS_SETUP_GUIDE.md                         # Personal AWS S3 frontend deployment guide
+|-- .gitignore
+|-- bikify.sh
+|-- bike-app/                                  # React/Vite frontend foundation
+|   |-- deployment.md
+|   |-- package.json
+|   |-- vite.config.js
+|   |-- public/
+|   `-- src/
+`-- django/                                    # Preserved Django monolith baseline
+    |-- bicycle_app/
+    |-- bicycle_project/
+    |-- media/
+    |-- static/
+    |-- deployment.md
+    |-- local_build.sh
+    |-- products.json
+    |-- requirements.txt
+    |-- requirements-dev.txt
+    `-- setup.sh
 ```
 
 ### Structure Notes
 
-- **`phase-1-bicycle-shop-microservices.zip`** contains the Phase 1 React frontend and Django baseline snapshot.
-- Includes `bike-app/deployment.md` with local React setup, AWS Code Editor preview, source-control handoff, and current AWS roadmap guidance.
-- Includes `django/deployment.md` with local Django setup, monolith baseline notes, AWS deployment scope, and future serverless target guidance.
-- `bike-app` validates with ESLint, Vitest, React Testing Library, and a Vite production build.
-- `django/local_build.sh` validates the Django baseline with Django system checks, Pylint, tests, and coverage.
-- Generated artifacts and unnecessary duplicate assets are excluded from the zip, including `node_modules/`, `dist/`, `.venv/`, `.coverage`, coverage reports, SQLite databases, collected static admin assets, Python cache folders, and unused screenshot/media duplicates.
+- Establishes the frontend foundation and keeps the original Django monolith available for comparison.
+- Includes local validation scripts for React and Django baseline work.
+- Includes `AWS_SETUP_GUIDE.md` for personal-account S3 static hosting and clear notes that API Gateway, Lambda, DynamoDB, SAM, and CloudWatch Logs arrive in later phases.
+
+</details>
+
+<details>
+<summary><b>Phase 2 Package Contents</b></summary>
+
+The archived Phase 2 package introduces the Products microservice and connects the React product catalog to AWS serverless backend resources.
+
+```bash
+phase-2-bicycle-shop-microservices.zip
+|-- AWS_SETUP_GUIDE.md                         # Personal AWS Products service deployment guide
+|-- bike-app/                                  # React app configured for API Gateway and S3 image URLs
+|   |-- .env.example
+|   |-- package.json
+|   |-- public/images/
+|   `-- src/components/Products.jsx
+|-- backend/
+|   |-- sam-app/
+|   |   |-- template.yaml                      # Products table, GetProducts Lambda, API route
+|   |   |-- handlers/get_products/
+|   |   `-- tests/
+|   `-- utils/
+|       |-- create_products/
+|       `-- s3/
+|-- products-django.json
+|-- products-transformed.json
+`-- create_images_bucket.py
+```
+
+### Structure Notes
+
+- Adds a DynamoDB-backed `Products` table and `GET /get_products` Lambda endpoint through AWS SAM.
+- Requires the personal AWS account to create the lab-style `LambdaApplicationRoleSam` runtime role before deployment.
+- Includes seed and S3 image bucket utilities. The AWS setup guide documents the manual S3 image upload step needed by this phase.
+
+</details>
+
+<details>
+<summary><b>Phase 3 Package Contents</b></summary>
+
+The archived Phase 3 package expands the serverless backend with order-history and order-detail read workflows.
+
+```bash
+phase-3-bicycle-shop-microservices.zip
+`-- microservices/
+    |-- AWS_SETUP_GUIDE.md                     # Personal AWS Products and Orders read deployment guide
+    |-- bike-app/
+    |   |-- .env.example
+    |   |-- package.json
+    |   |-- public/images/
+    |   `-- src/components/
+    |       |-- Products.jsx
+    |       |-- OrderHistory.jsx
+    |       `-- OrderDetails.jsx
+    `-- backend/
+        |-- sam-app/
+        |   |-- template.yaml                  # Products, Orders, and read-only Lambda routes
+        |   |-- handlers/get_products/
+        |   |-- handlers/get_orders/
+        |   `-- handlers/get_order/
+        `-- utils/
+            |-- create_products/
+            |-- create_orders/
+            `-- s3/
+```
+
+### Structure Notes
+
+- Adds `Orders` table support plus `GET /orders` and `GET /orders/{order_id}` API routes.
+- Keeps the lab-style `LambdaApplicationRoleSam` dependency and documents the exact trust policy, CloudWatch Logs managed policy, and DynamoDB read permissions required.
+- Includes sample order seed data and a personal AWS setup guide with Phase 3 smoke tests.
+
+</details>
+
+<details>
+<summary><b>Phase 4 Package Contents</b></summary>
+
+The archived Phase 4 package completes the first end-to-end customer order workflow.
+
+```bash
+phase-4-bicycle-shop-microservices.zip
+`-- microservices/
+    |-- AWS_SETUP_GUIDE.md                     # Personal AWS end-to-end deployment guide
+    |-- bike-app/
+    |   |-- .env.example
+    |   |-- package.json
+    |   |-- public/images/
+    |   `-- src/components/
+    |       |-- Products.jsx                   # Product catalog, cart, POST /orders
+    |       |-- OrderHistory.jsx
+    |       `-- OrderDetails.jsx
+    `-- backend/
+        |-- sam-app/
+        |   |-- template.yaml                  # API, Lambda, DynamoDB, IAM role, CORS
+        |   |-- handlers/create_order/
+        |   |-- handlers/get_products/
+        |   |-- handlers/get_orders/
+        |   `-- handlers/get_order/
+        `-- utils/
+            |-- create_products/
+            |-- create_orders/
+            `-- s3/
+```
+
+### Structure Notes
+
+- Adds `POST /orders` with a `CreateOrderFunction` Lambda handler.
+- Updates the SAM template to create the Lambda execution role inside the stack instead of depending on a pre-existing lab role.
+- Includes S3 image upload support, richer product detail data, and a full personal AWS deployment guide covering IAM, deployment, seed data, frontend configuration, smoke tests, troubleshooting, and cleanup.
 
 </details>
 
@@ -234,116 +339,60 @@ phase-1-bicycle-shop-microservices.zip
 ## Weekly Sprint Log
 
 <details>
-<summary><b>Week 1</b> - Package Frontend Foundation and Monolith Baseline</summary>
+<summary><b>Week 1</b> - Accelerated Phase 1-4 Microservices Sprint</summary>
 
 ### Sprint Focus
-- Create and preserve the React/Vite frontend foundation
-- Preserve the original Django Bicycle Parts monolith as the baseline application
-- Add local setup, build, test, and deployment guidance inside the phase package
-- Align the root repository with a packaged-deliverable documentation structure
+- Package the React/Vite frontend foundation and preserve the Django monolith baseline
+- Build the Products microservice with API Gateway, Lambda, DynamoDB, and S3 image assets
+- Add order history and order detail read workflows
+- Add order creation with `POST /orders` and DynamoDB persistence
+- Document personal AWS account deployment requirements for every packaged phase
 
 ### Status
 **Completed**
 
 ### Outcome
-The Phase 1 package now contains a validated React frontend and a preserved Django baseline. The repository root functions as a professional documentation and packaged-artifact record, while implementation details and local execution steps live inside package-level `deployment.md` files.
+Week 1 produced all four packaged phase deliverables. The project moved from a preserved Django monolith baseline to a React + AWS serverless microservices package with Products and Orders APIs, DynamoDB-backed data, SAM infrastructure, S3 image asset guidance, and personal AWS account deployment guides in every phase archive.
+
+### Phase Deliverables
+| Phase | Package | Completed Work |
+|---|---|---|
+| Phase 1 | `phase-1-bicycle-shop-microservices.zip` | React/Vite frontend foundation, preserved Django monolith baseline, local setup and validation scripts, personal AWS S3 frontend guide |
+| Phase 2 | `phase-2-bicycle-shop-microservices.zip` | Products API, `Products` DynamoDB table, `GetProductsFunction`, API Gateway route, product seed utility, S3 image bucket guidance |
+| Phase 3 | `phase-3-bicycle-shop-microservices.zip` | `Orders` table, order history API, order detail API, React order views, sample order seed utility |
+| Phase 4 | `phase-4-bicycle-shop-microservices.zip` | Order creation API, SAM-managed Lambda execution role, explicit API Gateway CORS, React cart checkout flow, S3 image upload workflow |
 
 ### What Was Added
-- `docs/phase-zips/phase-1-bicycle-shop-microservices.zip` - packaged Phase 1 deliverable
-- `bike-app/deployment.md` - React local development, AWS preview, and handoff guidance
-- `bike-app/.env.example` - optional frontend environment configuration
-- `django/` - original Django monolith baseline copied into the phase package
-- `django/setup.sh` - one-command local Django setup workflow
-- `django/local_build.sh` - Pylint, Django tests, and coverage validation
-- `django/deployment.md` - Django baseline and AWS deployment scope guide
-- `django/requirements.txt` and `django/requirements-dev.txt` - production and development dependency sets
-- `django/.env.example` - local Django environment template
-- `django/bicycle_app/tests.py` - baseline Django tests for package validation
+- `docs/phase-zips/phase-1-bicycle-shop-microservices.zip`
+- `docs/phase-zips/phase-2-bicycle-shop-microservices.zip`
+- `docs/phase-zips/phase-3-bicycle-shop-microservices.zip`
+- `docs/phase-zips/phase-4-bicycle-shop-microservices.zip`
+- `AWS_SETUP_GUIDE.md` or `microservices/AWS_SETUP_GUIDE.md` inside every phase ZIP
+- README package summaries, AWS guide path table, and completed milestone tracking for Phases 1-4
 
 ### What Was Tested
 | Area | Tests / Checks | Result |
 |---|---|---|
-| React frontend | `npm install`, `npm run lint`, `npm test -- --run`, `npm run build` | Passed |
-| Django baseline | `./local_build.sh` | Passed |
-| Django Pylint | `pylint-django` through `local_build.sh` | 10.00/10 |
-| Django tests | Django test runner through Coverage.py | 2 tests passed |
+| Phase 1 package | `unzip -tq phase-1-bicycle-shop-microservices.zip` | Passed |
+| Phase 2 package | `unzip -tq phase-2-bicycle-shop-microservices.zip` | Passed |
+| Phase 3 package | `unzip -tq phase-3-bicycle-shop-microservices.zip` | Passed |
+| Phase 4 package | `unzip -tq phase-4-bicycle-shop-microservices.zip` | Passed |
+| AWS guide paths | `unzip -Z1` checks for each guide path | Present |
 
 ### Summary
-Week 1 established the packaged project baseline for the Bicycle Parts microservices series. The frontend foundation is ready for later API integration, the Django monolith is retained for comparison and decomposition, and the root README now follows the same documentation pattern as the referenced packaged capstone repository.
+Week 1 is the full accelerated sprint record for Phases 1-4. The separate phase archives remain intact as point-in-time deliverables, but the sprint log now treats them as one completed Week 1 body of work.
 
 </details>
-
-<!-- Upcoming sprint entries are retained for later updates and hidden until completed.
-
-<details>
-<summary><b>Week 2</b> - Create the Products Microservice</summary>
-
-### Sprint Focus
-- Replace static product data with a Products API
-- Build the Products service with AWS serverless components
-- Store product data in Amazon DynamoDB
-
-### Status
-**Roadmap / Not Started**
-
-### Outcome
-Move product listing data behind a dedicated microservice.
-
-### Summary
-This phase will begin the backend service decomposition by implementing the Products service.
-
-</details>
-
-<details>
-<summary><b>Week 3</b> - Create Orders and Order Details Microservices</summary>
-
-### Sprint Focus
-- Add order retrieval workflows
-- Add order details retrieval workflows
-- Connect frontend order views to service APIs
-
-### Status
-**Roadmap / Not Started**
-
-### Outcome
-Extend the backend with order retrieval capabilities.
-
-### Summary
-This phase will expand service coverage beyond product listing into customer order lookups.
-
-</details>
-
-<details>
-<summary><b>Week 4</b> - Create the Process Orders Microservice</summary>
-
-### Sprint Focus
-- Add POST request handling for order submission
-- Persist orders in DynamoDB
-- Connect the React frontend to the order submission workflow
-
-### Status
-**Roadmap / Not Started**
-
-### Outcome
-Complete the first end-to-end customer order workflow in the microservices design.
-
-### Summary
-This phase will move order creation out of the monolith and into a dedicated service.
-
-</details>
-
--->
 
 ---
 
 ## Milestones
 
----
-
 - [x] Archive structure prepared under `docs/phase-zips/`
-- [x] `phase-1-bicycle-shop-microservices.zip` completed with the React frontend foundation, Django monolith baseline, local setup workflow, starter validation, and `deployment.md`
+- [x] `phase-1-bicycle-shop-microservices.zip` completed with the React frontend foundation, Django monolith baseline, local setup workflow, starter validation, and AWS setup guide
+- [x] `phase-2-bicycle-shop-microservices.zip` completed with the Products microservice, DynamoDB Products table, Lambda/API Gateway integration, seed utilities, S3 image guidance, and AWS setup guide
+- [x] `phase-3-bicycle-shop-microservices.zip` completed with order history and order details microservices, Orders table support, seed utilities, frontend order views, and AWS setup guide
+- [x] `phase-4-bicycle-shop-microservices.zip` completed with order creation, SAM-managed Lambda execution role, explicit API Gateway CORS, S3 image upload workflow, and AWS setup guide
 - [x] Architecture asset stored under `docs/images/`
-- [x] Weekly sprint log aligned with the completed Week 1 zip coverage
-- [ ] Phase 2 Products microservice package pending
-- [ ] Phase 3 Orders and Order Details microservices package pending
-- [ ] Phase 4 Process Orders microservice package pending
+- [x] Weekly sprint log updated with Phases 1-4 baked into the completed Week 1 sprint entry
+- [x] Personal AWS deployment guides added to every phase archive
