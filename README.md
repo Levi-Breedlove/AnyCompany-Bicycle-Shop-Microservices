@@ -6,7 +6,7 @@
 
 <p align="center">
   <img src="https://img.shields.io/badge/status-in_progress-2ea44f?style=flat-square" alt="Status Badge" />
-  <img src="https://img.shields.io/badge/phase-4_packaged-1f6feb?style=flat-square" alt="Phase Badge" />
+  <img src="https://img.shields.io/badge/phase-5_packaged-1f6feb?style=flat-square" alt="Phase Badge" />
   <img src="https://img.shields.io/badge/frontend-React-61dafb?style=flat-square&logo=react&logoColor=white" alt="React Badge" />
   <img src="https://img.shields.io/badge/framework-django-0c4b33?style=flat-square&logo=django&logoColor=white" alt="Django Badge" />
   <img src="https://img.shields.io/badge/cloud-AWS-232f3e?style=flat-square&logo=amazonaws&logoColor=white" alt="AWS Badge" />
@@ -17,10 +17,11 @@
   <img src="https://img.shields.io/badge/api-API_Gateway-7a3cff?style=flat-square" alt="API Gateway Badge" />
   <img src="https://img.shields.io/badge/database-DynamoDB-4053d6?style=flat-square" alt="DynamoDB Badge" />
   <img src="https://img.shields.io/badge/hosting-S3-f59e0b?style=flat-square" alt="S3 Badge" />
+  <img src="https://img.shields.io/badge/auth-Cognito-dd344c?style=flat-square" alt="Cognito Badge" />
 </p>
 
 <p align="center">
-  <b>Current Phase:</b> Phase 4 packaged with React storefront, Products and Orders APIs, DynamoDB-backed data, SAM infrastructure, and personal AWS account deployment guides for every phase archive
+  <b>Current Phase:</b> Phase 5 packaged with Cognito PKCE employee login, scoped API Gateway authorization, server-validated order pricing, cost controls, and a full personal AWS account deployment guide
 </p>
 
 </div>
@@ -33,9 +34,9 @@ This project focuses on refactoring the **AnyCompany Bicycle Parts application**
 
 The project starts from an existing Django ecommerce application and follows a phased sprint sequence centered on frontend modernization, service decomposition, serverless API development, DynamoDB-backed service data, and AWS deployment readiness.
 
-At the current stage, this repository functions as the **documentation and packaged-deliverable record** for the microservices project. Phases 1 through 4 are preserved as archived zip packages under `docs/phase-zips/`.
+At the current stage, this repository functions as the **documentation and packaged-deliverable record** for the microservices project. Phases 1 through 5 are preserved as archived zip packages under `docs/phase-zips/`.
 
-> **Schedule note:** Phases 1-4 were completed during one accelerated project week, so the sprint log below bakes all four phase deliverables into the Week 1 entry.
+> **Schedule note:** Phases 1-4 were completed during one accelerated project week. Phase 5 is tracked as the authentication and authorization milestone in Week 2.
 
 ---
 
@@ -62,24 +63,24 @@ Original monolith reference: https://github.com/Levi-Breedlove/AnyCompany-Bicycl
 | Project Status | In Progress |
 | Timeline | Accelerated multi-phase microservices build |
 | Repository Type | Documentation and packaged phase artifacts |
-| Deployment Target | AWS static frontend and serverless microservices |
+| Deployment Target | Locally run React frontend with personal-account AWS serverless microservices |
 | Application Type | React frontend with preserved Django baseline and AWS serverless backend packages |
-| Current Focus | Phase 4 complete: Products API, order history, order details, order creation, DynamoDB data, SAM infrastructure, S3 image assets, and personal AWS deployment guides |
+| Current Focus | Phase 5 complete: Cognito PKCE employee authentication, scoped API Gateway access-token authorization, server-validated order pricing, repeatable SAM infrastructure, packaged IAM policies, cost controls, and a personal AWS deployment guide |
 
 ---
 
 ## Architecture Diagram
 
-This project uses the class activity's target AWS microservices design for refactoring the AnyCompany Bicycle Parts application.
+This project uses an AWS microservices design for refactoring the AnyCompany Bicycle Parts application.
 
 <p align="center">
   <img src="docs/images/bicycle-parts-microservices-architecture.png" alt="Bicycle Parts Microservices Architecture Diagram" width="100%" />
 </p>
 
 **Architecture flow**  
-`React UI on Amazon S3 -> Amazon API Gateway -> AWS Lambda microservices -> Amazon DynamoDB service-owned tables`
+`React UI -> Amazon Cognito employee login -> Amazon API Gateway -> AWS Lambda microservices -> Amazon DynamoDB service-owned tables`
 
-The Phase 4 package implements the core serverless pattern for catalog and order workflows. The preserved Django monolith remains available in Phase 1 for comparison and decomposition reference.
+The Phase 5 package keeps public catalog and order submission workflows open while a Cognito authorizer protects employee order history and order detail reads. The preserved Django monolith remains available in Phase 1 for comparison and decomposition reference.
 
 ---
 
@@ -93,15 +94,15 @@ The Phase 4 package implements the core serverless pattern for catalog and order
 
 | Service | Purpose |
 |---------|---------|
-| AWS Code Editor / EC2 | Lab development workstation and preview environment |
 | GitHub / Git | Source-control handoff workflow |
-| AWS CodeCommit | Optional source-control target used in class lab flow |
-| Amazon S3 | Hosts frontend builds and browser-readable image assets |
+| AWS CodeCommit | Optional source-control target |
+| Amazon S3 | Stores SAM deployment artifacts |
 | Amazon API Gateway | HTTP integration layer for service endpoints |
 | AWS Lambda | Compute layer for Products and Orders microservices |
 | Amazon DynamoDB | Serverless datastore for Products and Orders tables |
+| Amazon Cognito | Employee sign-in and API Gateway token authorization |
 | AWS SAM / CloudFormation | Serverless build and deployment workflow |
-| IAM | Deployment and runtime permissions for SAM, Lambda, DynamoDB, S3, and API Gateway |
+| IAM | Deployment and runtime permissions for SAM, Lambda, DynamoDB, S3, API Gateway, and Cognito |
 | Amazon CloudWatch Logs | Lambda runtime logging and troubleshooting |
 
   </td>
@@ -137,8 +138,11 @@ Through the completed phase sequence, this project demonstrates:
 - replacing static product data with a Products API
 - adding order history, order details, and order creation workflows
 - deploying service APIs through AWS SAM, API Gateway, Lambda, and DynamoDB
-- hosting frontend image assets from Amazon S3
+- serving bundled frontend image assets during local development
+- adding Cognito authorization code flow with PKCE and scoped access-token authorization
+- validating cart contents and catalog pricing inside Lambda before persisting orders
 - documenting all personal-account AWS deployment prerequisites, IAM roles, policies, and cleanup steps
+- applying personal-account cost controls for DynamoDB capacity, logs, Cognito, API throttling, and tagged resources
 - packaging phase deliverables as clean zip archives
 
 ---
@@ -151,7 +155,7 @@ At this stage, the repository contains:
 
 - project documentation
 - architecture image assets used in the README
-- packaged **Phase 1**, **Phase 2**, **Phase 3**, and **Phase 4** application snapshots under `docs/phase-zips/`
+- packaged **Phase 1**, **Phase 2**, **Phase 3**, **Phase 4**, and **Phase 5** application snapshots under `docs/phase-zips/`
 - a personal AWS account setup guide inside every phase package
 
 The live React, Django, and serverless project files are preserved inside the archived packages and are not expanded into the root repository as active source code. Each zip package acts as a point-in-time snapshot that can be used for reference, backup, migration, deployment practice, or later extraction into a live working codebase.
@@ -164,6 +168,7 @@ The live React, Django, and serverless project files are preserved inside the ar
 | Phase 2 | `docs/phase-zips/phase-2-bicycle-shop-microservices.zip` | `AWS_SETUP_GUIDE.md` |
 | Phase 3 | `docs/phase-zips/phase-3-bicycle-shop-microservices.zip` | `microservices/AWS_SETUP_GUIDE.md` |
 | Phase 4 | `docs/phase-zips/phase-4-bicycle-shop-microservices.zip` | `microservices/AWS_SETUP_GUIDE.md` |
+| Phase 5 | `docs/phase-zips/phase-5-bicycle-shop-microservices.zip` | `microservices/AWS_SETUP_GUIDE.md` |
 
 Each guide covers the AWS services, IAM deployer permissions, Lambda runtime roles, inline policies, seed/upload script permissions, deployment commands, frontend environment values, smoke tests, troubleshooting, cleanup, and official AWS references needed to deploy that phase in a personal AWS account.
 
@@ -180,7 +185,8 @@ Each guide covers the AWS services, IAM deployer permissions, Lambda runtime rol
 |       |-- phase-1-bicycle-shop-microservices.zip
 |       |-- phase-2-bicycle-shop-microservices.zip
 |       |-- phase-3-bicycle-shop-microservices.zip
-|       `-- phase-4-bicycle-shop-microservices.zip
+|       |-- phase-4-bicycle-shop-microservices.zip
+|       `-- phase-5-bicycle-shop-microservices.zip
 `-- README.md
 ```
 
@@ -254,7 +260,7 @@ phase-2-bicycle-shop-microservices.zip
 ### Structure Notes
 
 - Adds a DynamoDB-backed `Products` table and `GET /get_products` Lambda endpoint through AWS SAM.
-- Requires the personal AWS account to create the lab-style `LambdaApplicationRoleSam` runtime role before deployment.
+- Requires the personal AWS account to create the pre-existing `LambdaApplicationRoleSam` runtime role before deployment.
 - Includes seed and S3 image bucket utilities. The AWS setup guide documents the manual S3 image upload step needed by this phase.
 
 </details>
@@ -291,7 +297,7 @@ phase-3-bicycle-shop-microservices.zip
 ### Structure Notes
 
 - Adds `Orders` table support plus `GET /orders` and `GET /orders/{order_id}` API routes.
-- Keeps the lab-style `LambdaApplicationRoleSam` dependency and documents the exact trust policy, CloudWatch Logs managed policy, and DynamoDB read permissions required.
+- Keeps the pre-existing `LambdaApplicationRoleSam` dependency and documents the exact trust policy, CloudWatch Logs managed policy, and DynamoDB read permissions required.
 - Includes sample order seed data and a personal AWS setup guide with Phase 3 smoke tests.
 
 </details>
@@ -329,8 +335,54 @@ phase-4-bicycle-shop-microservices.zip
 ### Structure Notes
 
 - Adds `POST /orders` with a `CreateOrderFunction` Lambda handler.
-- Updates the SAM template to create the Lambda execution role inside the stack instead of depending on a pre-existing lab role.
+- Updates the SAM template to create the Lambda execution role inside the stack instead of depending on a pre-existing account role.
 - Includes S3 image upload support, richer product detail data, and a full personal AWS deployment guide covering IAM, deployment, seed data, frontend configuration, smoke tests, troubleshooting, and cleanup.
+
+</details>
+
+<details>
+<summary><b>Phase 5 Package Contents</b></summary>
+
+The archived Phase 5 package adds employee authentication and protects
+employee-only order reads.
+
+```bash
+phase-5-bicycle-shop-microservices.zip
+`-- microservices/
+    |-- AWS_SETUP_GUIDE.md                     # Full personal AWS auth deployment guide
+    |-- bike-app/
+    |   |-- .env.example                       # API and Cognito environment values
+    |   |-- package.json
+    |   `-- src/
+    |       |-- App.jsx                        # Login callback and sign-out state
+    |       |-- auth.js                        # Cognito authorization code + PKCE
+    |       `-- components/
+    |           |-- Products.jsx               # Public catalog and POST /orders
+    |           |-- OrderHistory.jsx           # Bearer token for protected read
+    |           `-- OrderDetails.jsx           # Bearer token for protected read
+    `-- backend/
+        |-- iam/
+        |   |-- phase-5-deployer-policy.json   # Temporary SAM lifecycle permissions
+        |   `-- phase-5-operator-policy.template.json
+        |-- sam-app/
+        |   |-- template.yaml                  # API, Lambda, DynamoDB, IAM, Cognito, logs
+        |   |-- handlers/create_order/
+        |   |-- handlers/get_products/
+        |   |-- handlers/get_orders/
+        |   `-- handlers/get_order/
+        `-- utils/
+            |-- create_products/
+            `-- create_orders/
+```
+
+### Structure Notes
+
+- Adds the `bike_app` Cognito user pool, PKCE browser client, custom `orders.read` scope, and classic Hosted UI domain through AWS SAM.
+- Adds an API Gateway Cognito authorizer that validates scoped access tokens for `GET /orders` and `GET /orders/{order_id}` while public catalog and order-submission workflows remain open.
+- Updates React to complete authorization code flow with PKCE, keep the access token in session storage, show employee-only navigation, and send the token for protected requests.
+- Recalculates order prices in Lambda from the DynamoDB catalog instead of trusting browser-supplied values.
+- Uses DynamoDB on-demand billing, seven-day log retention, Cognito Lite, API throttling, bundled local images, and capstone tags to reduce surprise-cost risk.
+- Includes full deployer and operator IAM policy files plus a personal AWS deployment guide covering repeatable SAM deployment, budget setup, employee creation, smoke tests, troubleshooting, cleanup, and production-minded notes.
 
 </details>
 
@@ -384,6 +436,42 @@ Week 1 is the full accelerated sprint record for Phases 1-4. The separate phase 
 
 </details>
 
+<details>
+<summary><b>Week 2</b> - Phase 5 Authentication and Authorization Sprint</summary>
+
+### Sprint Focus
+- Add Cognito employee authentication with the classic Hosted UI
+- Protect order history and order detail reads with an API Gateway Cognito authorizer
+- Send the Cognito scoped access token from React for protected employee requests
+- Package the full personal-account deployment path
+- Add IAM policy files, budget guidance, cost controls, and teardown verification
+
+### Status
+**Completed**
+
+### Outcome
+Week 2 produced the Phase 5 package with a clean React frontend, complete Phase
+4 backend baseline, SAM-managed Cognito resources, protected employee APIs,
+personal-account cost controls, packaged IAM policies, and a full personal AWS
+deployment guide.
+
+### What Was Tested
+| Area | Tests / Checks | Result |
+|---|---|---|
+| Frontend install | `npm ci --ignore-scripts` | Passed |
+| Frontend tests | `npm test -- --run` | Passed: 6 tests |
+| Frontend lint | `npm run lint` | Passed |
+| Frontend build | `npm run build` | Passed |
+| Production dependency audit | `npm audit --omit=dev --audit-level=high` | Passed: 0 vulnerabilities |
+| Backend syntax | `python3 -m compileall -q backend` | Passed |
+| Backend behavior | `python3 -m unittest discover -s backend/tests -v` | Passed: server-side pricing and missing-order checks |
+| SAM structure | YAML parse plus auth, capacity, tier, throttle, and log-retention assertions | Passed |
+| IAM policies | JSON parse for deployer and operator policies | Passed |
+| Phase 5 package | `unzip -tq phase-5-bicycle-shop-microservices.zip` | Passed |
+| AWS guide path | `microservices/AWS_SETUP_GUIDE.md` | Present |
+
+</details>
+
 ---
 
 ## Milestones
@@ -393,6 +481,8 @@ Week 1 is the full accelerated sprint record for Phases 1-4. The separate phase 
 - [x] `phase-2-bicycle-shop-microservices.zip` completed with the Products microservice, DynamoDB Products table, Lambda/API Gateway integration, seed utilities, S3 image guidance, and AWS setup guide
 - [x] `phase-3-bicycle-shop-microservices.zip` completed with order history and order details microservices, Orders table support, seed utilities, frontend order views, and AWS setup guide
 - [x] `phase-4-bicycle-shop-microservices.zip` completed with order creation, SAM-managed Lambda execution role, explicit API Gateway CORS, S3 image upload workflow, and AWS setup guide
+- [x] `phase-5-bicycle-shop-microservices.zip` completed with Cognito employee login, API Gateway authorization, protected React order requests, repeatable personal-account SAM infrastructure, IAM policy files, cost controls, and AWS setup guide
 - [x] Architecture asset stored under `docs/images/`
 - [x] Weekly sprint log updated with Phases 1-4 baked into the completed Week 1 sprint entry
+- [x] Week 2 authentication and authorization sprint documented for Phase 5
 - [x] Personal AWS deployment guides added to every phase archive
