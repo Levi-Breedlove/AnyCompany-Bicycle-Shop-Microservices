@@ -1,8 +1,5 @@
 <div align="center">
 
-<p>
-  <img src="https://img.shields.io/badge/AWS_Serverless_Release-Phase_7_Complete-2ea44f?style=for-the-badge&logo=amazonaws&logoColor=white" alt="AWS Serverless Release Badge" />
-</p>
 
 # AnyCompany Bicycle Shop Microservices
 
