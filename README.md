@@ -12,22 +12,6 @@
   <b>Cloud-native ecommerce platform with secure employee workflows, event-driven reporting, and distributed observability.</b>
 </p>
 
-<p align="center">
-  <img src="https://img.shields.io/badge/Frontend-React_+_Vite-61dafb?style=flat-square&logo=react&logoColor=white" alt="React and Vite Badge" />
-  <img src="https://img.shields.io/badge/Backend-Python_3.12_Lambda-ff9900?style=flat-square&logo=python&logoColor=white" alt="Python Lambda Badge" />
-  <img src="https://img.shields.io/badge/IaC-AWS_SAM_+_CloudFormation-232f3e?style=flat-square&logo=amazonaws&logoColor=white" alt="AWS SAM and CloudFormation Badge" />
-  <img src="https://img.shields.io/badge/Auth-Cognito-dd344c?style=flat-square" alt="Cognito Badge" />
-  <img src="https://img.shields.io/badge/Tracing-X--Ray-7a3cff?style=flat-square" alt="X-Ray Tracing Badge" />
-</p>
-
-<p align="center">
-  <img src="https://img.shields.io/badge/API-API_Gateway-527fff?style=flat-square" alt="API Gateway Badge" />
-  <img src="https://img.shields.io/badge/Compute-Lambda-ff9900?style=flat-square" alt="Lambda Badge" />
-  <img src="https://img.shields.io/badge/Data-DynamoDB-4053d6?style=flat-square" alt="DynamoDB Badge" />
-  <img src="https://img.shields.io/badge/Workflow-Step_Functions-cf3df6?style=flat-square" alt="Step Functions Badge" />
-  <img src="https://img.shields.io/badge/Messaging-SNS-c17bff?style=flat-square" alt="SNS Badge" />
-  <img src="https://img.shields.io/badge/Storage-S3-569a31?style=flat-square" alt="S3 Badge" />
-</p>
 
 </div>
 
